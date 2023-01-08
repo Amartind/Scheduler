@@ -8,6 +8,7 @@ console.log(timeOfDayEl)
 console.log(btnEl)
 
 
+// TODO: Add code to display the current date in the header of the page.
 $(function update(){
   var time = dayjs().format('dddd, MMMM DD')
   $('#currentDay').text(time)
@@ -31,17 +32,16 @@ $(function () {
     // console.log(userInput)
     // var todoList = $(this).siblings('.description').val();
     // localStorage.setItem('todoList', todoList)
-
-
+    
+    
     for (let i = 0; i < 9; i++) {
       var containerEl = $('.container').children().eq(i).children().eq(1);
-      let text = containerEl.val();
+      var text = containerEl.val();
       emptyList.push(text || "");
-      console.log(emptyList);
+      // console.log(emptyList);
       localStorage.clear();
       localStorage.setItem('todoList', JSON.stringify(emptyList))
-      let savedList = JSON.parse(localStorage.getItem('todoList')) 
-      console.log(savedList)
+      // console.log(savedList)
     }
   })
   // if (currentHour === btnEl.prevAll('div').html()){
@@ -50,34 +50,38 @@ $(function () {
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
-      // past, present, and future classes? How can Day.js be used to get the
-      // current hour in 24-hour time?
-      var currentHour = dayjs().format('H')
-      console.log(currentHour)
-      
-      var arrayDiv = $('div').map(function() {
-        return $(this).attr('id');
-      }).get();
-      
-      
-      console.log(arrayDiv)
-      arrayDiv.forEach(function(element) {
-        if (element == currentHour) {
-          console.log('Match found');
-          console.log(element);
-          $('#' + element).addClass('present').removeClass('past');
-        } else if (element > currentHour) {
-          $('#' + element).addClass('future').removeClass('past');
-        }  
-        })
-      
-      // TODO: Add code to get any user input that was saved in localStorage and set
-      // the values of the corresponding textarea elements. HINT: How can the id
-      // attribute of each time-block be used to do this?
-      var savedList = localStorage.getItem('description')
-      $('#description').html(savedList);
-      
-      // TODO: Add code to display the current date in the header of the page.
-      console.log(currentHour)
-    });
+    // past, present, and future classes? How can Day.js be used to get the
+    // current hour in 24-hour time?
+    var currentHour = dayjs().format('H')
+    console.log(currentHour)
+    
+    var arrayDiv = $('div').map(function() {
+      return $(this).attr('id');
+    }).get();
+    
+    
+    console.log(arrayDiv)
+    arrayDiv.forEach(function(element) {
+      if (element == currentHour) {
+        console.log('Match found');
+        console.log(element);
+        $('#' + element).addClass('present').removeClass('past');
+      } else if (element > currentHour) {
+        $('#' + element).addClass('future').removeClass('past');
+      }  
+    })
+    
+    // TODO: Add code to get any user input that was saved in localStorage and set
+    // the values of the corresponding textarea elements. HINT: How can the id
+    // attribute of each time-block be used to do this?
+    $(document).ready(function() {
+    var savedList = JSON.parse(localStorage.getItem('todoList')) 
+    $('.container').children().each(function(index) {
+      var textarea = $(this).children().eq(1);
+      textarea.val(savedList[index]);
+    })});
+  });
+    // console.log(currentHour)
+    
+    
     
