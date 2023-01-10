@@ -1,8 +1,9 @@
 # Scheduler
 ## Description
 
-This application will help keep track of daily tasks.
-
+This application targets employee's with a busy schedule
+who want to add important events to a daily planner
+so that people can manage their time effectively
 
 ## Usage
 ![alt text](assets/images/Workdayscheduler.PNG)
